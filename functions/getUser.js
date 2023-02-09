@@ -2,7 +2,10 @@ const dotenv = require("dotenv");
 const axios = require("axios");
 dotenv.config();
 
-(async () => {
+var getUser;
+var userId;
+
+getUser = async function (username) {
     try {
         const config = {
             headers: {
@@ -12,10 +15,17 @@ dotenv.config();
             },
         };
 
-        const response = await axios.get("https://api.twitch.tv/helix/users?login=silkyyy_johnson", config).then(function (response) {
-            console.log(response.data.data[0].id);
+        const response = await axios.get("https://api.twitch.tv/helix/users?login=" + username, config).then((response) => {
+            return response.data.data[0].id;
+            // console.log(userId);
+            // handle this promise and return the user ID
+            // return Promise.resolve(userId);
         });
     } catch (error) {
         console.log("error " + error);
     }
-})();
+};
+
+module.exports.getUser = async function (username) {
+    await getUser(username);
+};
