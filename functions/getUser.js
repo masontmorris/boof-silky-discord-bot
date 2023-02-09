@@ -15,17 +15,12 @@ getUser = async function (username) {
             },
         };
 
-        const response = await axios.get("https://api.twitch.tv/helix/users?login=" + username, config).then((response) => {
-            return response.data.data[0].id;
-            // console.log(userId);
-            // handle this promise and return the user ID
-            // return Promise.resolve(userId);
-        });
+        const userData = await axios.get("https://api.twitch.tv/helix/users?login=" + username, config);
+        // console.log(userData.data.data[0].id);
+        return userData.data.data[0].id;
     } catch (error) {
         console.log("error " + error);
     }
 };
 
-module.exports.getUser = async function (username) {
-    await getUser(username);
-};
+module.exports.getUser = getUser;
