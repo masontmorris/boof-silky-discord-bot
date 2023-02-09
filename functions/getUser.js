@@ -16,7 +16,7 @@ getUser = async function (username) {
         };
 
         const userData = await axios.get("https://api.twitch.tv/helix/users?login=" + username, config);
-        // console.log(userData.data.data[0].id);
+
         return userData.data.data[0].id;
     } catch (error) {
         console.log("error " + error);

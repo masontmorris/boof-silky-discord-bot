@@ -1,8 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { getUser } = require("../functions/getUser.js");
 
-var user;
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("idlookup")
