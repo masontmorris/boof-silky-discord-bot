@@ -4,6 +4,8 @@ const { getUser } = require("./getUser.js");
 
 dotenv.config();
 
+var liveObject;
+
 var checkIfLive = async function (username) {
     getUser(username).then((userId) => {
         console.log("Looking up if " + username + " is live.");
@@ -16,16 +18,17 @@ var checkIfLive = async function (username) {
         };
 
         axios.get("https://api.twitch.tv/helix/streams?user_id=" + userId, config).then((response) => {
-            console.log(response.data.data[0]);
-            if (response.data.data[0] == undefined) {
-                console.log("User is not live.");
-                return false;
-            } else {
-                console.log("User is live.");
-                return true;
-            }
+            // console.log(response.data.data[0]);
+            // isLive = response.data.data[0] != undefined ? true : false;
+            // if (isLive == undefined) {
+            //     isLive = false;
+            // }
+            liveObject = response.data.data[0];
+            // // console.log(isLive);
+            // // return response.data.data[0];
         });
     });
+    return liveObject;
 };
 
 module.exports.checkIfLive = checkIfLive;

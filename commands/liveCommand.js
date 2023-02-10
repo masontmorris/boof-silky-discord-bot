@@ -8,14 +8,14 @@ module.exports = {
         .addStringOption((option) => option.setName("username").setDescription("The username of the Twitch channel you want to look up.").setRequired(true)),
     async execute(interaction) {
         const username = interaction.options.getString("username");
-        console.log("Looking up if " + username + " is live.");
+        // console.log("Looking up if " + username + " is live.");
 
         var response = await checkIfLive(username);
-        console.log(response);
-        if (response == false) {
-            await interaction.reply(username + " is not live.");
-        } else {
+        // console.log(response);
+        if (response == undefined) {
             await interaction.reply(username + " is live.");
+        } else {
+            await interaction.reply(username + " is not live.");
         }
     },
 };
